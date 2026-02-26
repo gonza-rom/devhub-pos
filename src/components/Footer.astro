@@ -1,0 +1,32 @@
+---
+const links = [
+  { href: '/privacidad', label: 'Privacidad' },
+  { href: '/terminos',   label: 'Términos' },
+  { href: 'mailto:hola@devhubpos.com', label: 'Contacto' },
+];
+---
+
+<footer class="relative z-10 flex flex-wrap items-center justify-between gap-4
+               px-[5vw] py-10 border-t border-white/[0.07]">
+
+  <a href="/" class="no-underline">
+    <img
+      src="/devhub-pos-logo-bg.png"
+      alt="DevHub POS"
+      class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity duration-200"
+    />
+  </a>
+
+  <p class="text-xs text-gray-500">
+    © {new Date().getFullYear()} DevHub POS. Todos los derechos reservados.
+  </p>
+
+  <nav class="flex gap-6">
+    {links.map((l) => (
+      <a href={l.href}
+         class="text-xs text-gray-500 hover:text-white transition-colors duration-200 no-underline">
+        {l.label}
+      </a>
+    ))}
+  </nav>
+</footer>

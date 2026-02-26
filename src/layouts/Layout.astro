@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'DevHub POS — Control total de tu negocio',
+  description = 'Sistema de gestión en la nube para comercios modernos.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      import { inject } from '@vercel/analytics';
+      inject();
+    </script>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll('.fade-in').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

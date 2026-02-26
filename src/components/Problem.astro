@@ -1,0 +1,53 @@
+---
+const problems = [
+  'No sabés cuánto stock te queda en tiempo real',
+  'No sabés realmente cuánto ganás cada día',
+  'Tus reportes son planillas de Excel desactualizadas',
+  'No podés ver el negocio cuando no estás presente',
+  'Cada cierre de caja es un caos manual',
+];
+const solutions = [
+  'Stock actualizado en tiempo real, con alertas automáticas',
+  'Rentabilidad clara: costos, márgenes y ganancias al instante',
+  'Reportes automáticos diarios, semanales y mensuales',
+  'Acceso desde cualquier dispositivo, en cualquier lugar',
+  'Cierre de caja en segundos, sin errores',
+];
+---
+
+<section class="fade-in relative z-10 px-[5vw] py-28 max-w-[1200px] mx-auto">
+
+  <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+    El problema real
+  </span>
+  <h2 class="font-head font-extrabold tracking-tight leading-[1.1]
+             text-[clamp(2rem,3.5vw,3rem)]">
+    Tu negocio crece,<br />pero tu sistema no.
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-6 mt-16">
+
+    <div class="bg-white/[0.02] border border-white/[0.07] rounded-xl p-10">
+      <p class="font-head font-bold text-lg text-gray-500 mb-6">❌ Sin DevHub POS</p>
+      <ul class="flex flex-col gap-4 list-none p-0 m-0">
+        {problems.map((item) => (
+          <li class="flex items-start gap-3 text-sm text-gray-500 leading-relaxed">
+            <span class="mt-0.5 shrink-0">✗</span>{item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="border border-red/20 rounded-xl p-10" style="background: rgba(220,38,38,0.05)">
+      <p class="font-head font-bold text-lg text-red mb-6">✓ Con DevHub POS</p>
+      <ul class="flex flex-col gap-4 list-none p-0 m-0">
+        {solutions.map((item) => (
+          <li class="flex items-start gap-3 text-sm leading-relaxed">
+            <span class="text-red font-bold mt-0.5 shrink-0">✓</span>{item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+</section>

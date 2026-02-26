@@ -1,0 +1,127 @@
+---
+const stats = [
+  { num: '+500',  label: 'Comercios activos' },
+  { num: '99.9%', label: 'Uptime garantizado' },
+  { num: '24/7',  label: 'Soporte incluido' },
+  { num: '<2min', label: 'Setup inicial' },
+];
+
+const bars   = [40, 65, 50, 80, 60, 90, 70, 55, 75, 95, 60, 45];
+const active = [5, 9];
+---
+
+<section class="relative min-h-screen flex flex-col items-center justify-center
+                text-center px-[5vw] pt-32 pb-24 overflow-hidden z-10">
+
+  <!-- Radial glow -->
+  <div class="absolute top-[15%] left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none"
+       style="background: radial-gradient(ellipse, rgba(220,38,38,0.12) 0%, transparent 70%);" />
+
+  <!-- Badge -->
+  <div class="inline-flex items-center gap-2 mb-8 px-3.5 py-1.5 rounded-full
+              text-red-300 text-[0.7rem] font-semibold tracking-[0.06em] uppercase
+              bg-red/10 border border-red/25
+              animate-fade-up">
+    <span class="w-1.5 h-1.5 rounded-full bg-red animate-dot-pulse" />
+    🚀 Nuevo · Sistema POS en la nube
+  </div>
+  <!-- Logo centrado con glow flotante -->
+<div class="animate-fade-up mb-8">
+  <img
+    src="/devhub-pos-logo-bg.png"
+    alt="DevHub POS"
+    class="h-20 w-auto mx-auto drop-shadow-[0_0_30px_rgba(220,38,38,0.4)]"
+  />
+</div>
+  <!-- Headline -->
+  <h1 class="font-head font-extrabold leading-[1.04] tracking-[-0.03em]
+             text-[clamp(2.75rem,6vw,5.5rem)] max-w-[14ch] mx-auto mb-6
+             animate-fade-up-1">
+    Control total de tu negocio
+    <em class="not-italic text-red"> en un solo lugar.</em>
+  </h1>
+
+  <!-- Subtitle -->
+  <p class="text-[clamp(1rem,1.6vw,1.2rem)] text-gray-500 font-light
+            max-w-[52ch] mx-auto leading-relaxed mb-10
+            animate-fade-up-2">
+    DevHub POS es el sistema de gestión en la nube diseñado para comercios
+    modernos. Vendé más, perdé menos, decidí mejor.
+  </p>
+
+  <!-- CTAs -->
+  <div class="flex gap-4 flex-wrap justify-center animate-fade-up-3">
+    <a href="#pricing"
+       class="inline-flex items-center gap-2 px-8 py-3.5 rounded-md font-medium
+              bg-red hover:bg-red-dk text-white
+              transition-all duration-200 hover:-translate-y-px hover:shadow-glow no-underline">
+      🚀 Comenzar ahora
+    </a>
+    <a href="#contact"
+       class="inline-flex items-center gap-2 px-8 py-3.5 rounded-md font-medium
+              border border-white/[0.07] text-white
+              hover:border-white/25 hover:bg-white/[0.04] transition-all duration-200 no-underline">
+      📅 Solicitar demo
+    </a>
+  </div>
+
+  <!-- Dashboard mock -->
+  <div class="w-full max-w-[900px] mx-auto mt-16 animate-fade-up-3">
+    <div class="bg-card border border-white/[0.07] rounded-xl overflow-hidden shadow-dash">
+
+      <!-- Window bar -->
+      <div class="flex items-center gap-2 px-4 py-3 bg-soft border-b border-white/[0.07]">
+        <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#FF5F56]" />
+        <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#FFBD2E]" />
+        <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#27C93F]" />
+        <span class="ml-3 text-xs text-gray-500">devhubpos.com — Dashboard</span>
+      </div>
+
+      <!-- KPI cards -->
+      <div class="p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-soft border border-white/[0.07] rounded-lg p-4">
+          <div class="text-[0.65rem] uppercase tracking-wider text-gray-500 mb-2">Ventas hoy</div>
+          <div class="font-head font-bold text-2xl text-red">$84,320</div>
+          <div class="text-[0.65rem] text-green-500 mt-1">↑ +12% vs ayer</div>
+        </div>
+        <div class="bg-soft border border-white/[0.07] rounded-lg p-4">
+          <div class="text-[0.65rem] uppercase tracking-wider text-gray-500 mb-2">Transacciones</div>
+          <div class="font-head font-bold text-2xl">247</div>
+          <div class="text-[0.65rem] text-green-500 mt-1">↑ +8% vs ayer</div>
+        </div>
+        <div class="bg-soft border border-white/[0.07] rounded-lg p-4">
+          <div class="text-[0.65rem] uppercase tracking-wider text-gray-500 mb-2">Stock bajo</div>
+          <div class="font-head font-bold text-2xl text-amber-400">3</div>
+          <div class="text-[0.65rem] text-amber-400 mt-1">⚠ Reponer pronto</div>
+        </div>
+        <div class="bg-soft border border-white/[0.07] rounded-lg p-4">
+          <div class="text-[0.65rem] uppercase tracking-wider text-gray-500 mb-2">Ticket promedio</div>
+          <div class="font-head font-bold text-2xl">$341</div>
+          <div class="text-[0.65rem] text-green-500 mt-1">↑ +5% este mes</div>
+        </div>
+
+        <!-- Mini bar chart -->
+        <div class="col-span-2 md:col-span-4 bg-soft border border-white/[0.07]
+                    rounded-lg p-4 h-24 flex items-end gap-1">
+          {bars.map((h, i) => (
+            <div
+              class={`flex-1 rounded-t-sm transition-colors duration-300 ${active.includes(i) ? 'bg-red' : 'bg-white/[0.07]'}`}
+              style={`height:${h}%`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="flex flex-wrap gap-12 justify-center mt-20 pt-12
+              border-t border-white/[0.07] relative z-10 animate-fade-up-4">
+    {stats.map((s) => (
+      <div class="text-center">
+        <div class="font-head font-extrabold text-3xl">{s.num}</div>
+        <div class="text-[0.75rem] uppercase tracking-wider text-gray-500 mt-1">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</section>

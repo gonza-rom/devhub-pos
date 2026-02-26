@@ -1,0 +1,50 @@
+---
+const features = [
+  { icon: '📦', title: 'Gestión de Productos',   desc: 'Cargá productos con fotos, precios, costos y categorías. Variantes ilimitadas de talle, color o presentación.' },
+  { icon: '📊', title: 'Control de Inventario',  desc: 'Stock en tiempo real. Alertas cuando llegás al mínimo. Historial de movimientos completo y exportable.' },
+  { icon: '🖥️', title: 'Modo Caja Optimizado',   desc: 'Interfaz rápida, táctil y sin fricciones. Procesá ventas, aplicá descuentos y emitís tickets en segundos.' },
+  { icon: '📈', title: 'Reportes Inteligentes',  desc: 'Dashboards en tiempo real con ventas, ganancia neta, productos más vendidos y tendencias del período.' },
+  { icon: '👥', title: 'Multiusuario',            desc: 'Creá roles para dueños, vendedores y supervisores. Cada uno ve solo lo que necesita para trabajar.' },
+  { icon: '🔒', title: 'Seguridad y Backups',    desc: 'Tus datos cifrados en la nube con backups automáticos. Nunca pierdas información crítica de tu negocio.' },
+];
+---
+
+<section id="features" class="fade-in relative z-10 py-28 px-[5vw] bg-soft
+                              border-t border-b border-white/[0.07]">
+  <div class="max-w-[1200px] mx-auto">
+
+    <div class="flex flex-wrap justify-between items-end gap-8 mb-16">
+      <div>
+        <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+          Funcionalidades
+        </span>
+        <h2 class="font-head font-extrabold tracking-tight leading-[1.1] text-[clamp(2rem,3.5vw,3rem)]">
+          Todo lo que tu comercio<br />necesita para escalar.
+        </h2>
+      </div>
+      <p class="text-gray-500 font-light leading-relaxed max-w-[44ch]">
+        Herramientas pensadas para comercios reales, no para grandes corporaciones.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 divide-x divide-y divide-white/[0.07]
+                border border-white/[0.07] rounded-xl overflow-hidden">
+      {features.map((f) => (
+        <div class="group relative bg-card p-8 overflow-hidden hover:bg-[#1c1c1c] transition-colors duration-200">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+               style="background: linear-gradient(135deg, rgba(220,38,38,0.05) 0%, transparent 60%)" />
+          <div class="relative z-10">
+            <div class="w-[42px] h-[42px] rounded-lg flex items-center justify-center text-lg mb-5
+                        border border-red/20"
+                 style="background: rgba(220,38,38,0.1)">
+              {f.icon}
+            </div>
+            <p class="font-head font-bold text-base mb-2">{f.title}</p>
+            <p class="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

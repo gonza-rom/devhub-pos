@@ -1,0 +1,106 @@
+---
+const plans = [
+  {
+    name: 'Starter', price: '0', period: 'Gratis para siempre',
+    featured: false,
+    features: [
+      { text: 'Hasta 100 productos', ok: true },
+      { text: '1 usuario / caja',    ok: true },
+      { text: 'Reportes básicos',    ok: true },
+      { text: 'Soporte por email',   ok: true },
+      { text: 'Multi-sucursal',      ok: false },
+      { text: 'Integraciones',       ok: false },
+    ],
+    cta: 'Empezar gratis', href: '#contact', style: 'outline',
+  },
+  {
+    name: 'Pro', price: '29', period: 'por mes · hasta 3 usuarios',
+    featured: true, badge: 'Más popular',
+    features: [
+      { text: 'Productos ilimitados', ok: true },
+      { text: 'Hasta 3 usuarios',     ok: true },
+      { text: 'Reportes avanzados',   ok: true },
+      { text: 'Soporte prioritario',  ok: true },
+      { text: 'Alertas de stock',     ok: true },
+      { text: 'Multi-sucursal',       ok: false },
+    ],
+    cta: 'Probar 14 días gratis', href: '#contact', style: 'primary',
+  },
+  {
+    name: 'Business', price: '79', period: 'por mes · usuarios ilimitados',
+    featured: false,
+    features: [
+      { text: 'Productos ilimitados', ok: true },
+      { text: 'Usuarios ilimitados',  ok: true },
+      { text: 'Multi-sucursal',       ok: true },
+      { text: 'API e integraciones',  ok: true },
+      { text: 'Soporte 24/7',         ok: true },
+      { text: 'Onboarding dedicado',  ok: true },
+    ],
+    cta: 'Hablar con ventas', href: '#contact', style: 'outline',
+  },
+];
+---
+
+<section id="pricing" class="fade-in relative z-10 py-28 px-[5vw]">
+  <div class="max-w-[1200px] mx-auto">
+
+    <div class="text-center mb-16">
+      <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+        Planes y precios
+      </span>
+      <h2 class="font-head font-extrabold tracking-tight leading-[1.1] text-[clamp(2rem,3.5vw,3rem)]">
+        Empezá gratis.<br />Escalá cuando crezcas.
+      </h2>
+      <p class="text-gray-500 font-light mt-4">
+        Sin compromisos. Sin tarjeta de crédito para el plan Starter.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {plans.map((plan) => (
+        <div class={`relative rounded-xl p-8 border transition-transform duration-200 hover:-translate-y-1
+          ${plan.featured
+            ? 'border-red hover:shadow-card'
+            : 'border-white/[0.07] bg-card'}`}
+          style={plan.featured ? 'background: linear-gradient(160deg, rgba(220,38,38,0.08) 0%, #161616 50%)' : ''}>
+
+          {plan.badge && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2
+                        bg-red text-white text-[0.65rem] font-bold
+                        uppercase tracking-widest px-3.5 py-1 rounded-full whitespace-nowrap">
+              {plan.badge}
+            </div>
+          )}
+
+          <p class="font-head font-bold text-sm uppercase tracking-widest text-gray-500 mb-4">{plan.name}</p>
+          <p class="font-head font-extrabold text-5xl tracking-tight leading-none mb-1">
+            <sup class="text-2xl align-super">$</sup>{plan.price}
+          </p>
+          <p class="text-sm text-gray-500 mb-6">{plan.period}</p>
+
+          <div class="h-px bg-white/[0.07] mb-6" />
+
+          <ul class="flex flex-col gap-3 mb-8 list-none p-0 m-0">
+            {plan.features.map((f) => (
+              <li class={`flex items-center gap-2.5 text-sm ${f.ok ? 'text-gray-300' : 'text-gray-600 opacity-40'}`}>
+                <span class={f.ok ? 'text-red font-bold' : 'text-gray-500'}>{f.ok ? '✓' : '✗'}</span>
+                {f.text}
+              </li>
+            ))}
+          </ul>
+
+          <a href={plan.href}
+             class={`flex items-center justify-center w-full py-3 rounded-md text-sm font-medium
+                     transition-all duration-200 no-underline
+                     ${plan.style === 'primary'
+                       ? 'bg-red hover:bg-red-dk text-white hover:shadow-glow hover:-translate-y-px'
+                       : 'border border-white/[0.07] text-white hover:border-white/25 hover:bg-white/[0.04]'}`}>
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
