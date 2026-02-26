@@ -1,19 +1,21 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const features = [
-  { icon: '📦', title: 'Gestión de Productos',   desc: 'Cargá productos con fotos, precios, costos y categorías. Variantes ilimitadas de talle, color o presentación.' },
-  { icon: '📊', title: 'Control de Inventario',  desc: 'Stock en tiempo real. Alertas cuando llegás al mínimo. Historial de movimientos completo y exportable.' },
-  { icon: '🖥️', title: 'Modo Caja Optimizado',   desc: 'Interfaz rápida, táctil y sin fricciones. Procesá ventas, aplicá descuentos y emitís tickets en segundos.' },
-  { icon: '📈', title: 'Reportes Inteligentes',  desc: 'Dashboards en tiempo real con ventas, ganancia neta, productos más vendidos y tendencias del período.' },
-  { icon: '👥', title: 'Multiusuario',            desc: 'Creá roles para dueños, vendedores y supervisores. Cada uno ve solo lo que necesita para trabajar.' },
-  { icon: '🔒', title: 'Seguridad y Backups',    desc: 'Tus datos cifrados en la nube con backups automáticos. Nunca pierdas información crítica de tu negocio.' },
+  { icon: 'lucide:package',        title: 'Gestión de Productos',   desc: 'Cargá productos con fotos, precios, costos y categorías. Variantes ilimitadas de talle, color o presentación.' },
+  { icon: 'lucide:boxes',          title: 'Control de Inventario',  desc: 'Stock en tiempo real. Alertas cuando llegás al mínimo. Historial de movimientos completo y exportable.' },
+  { icon: 'lucide:monitor',        title: 'Modo Caja Optimizado',   desc: 'Interfaz rápida, táctil y sin fricciones. Procesá ventas, aplicá descuentos y emitís tickets en segundos.' },
+  { icon: 'lucide:bar-chart-2',    title: 'Reportes Inteligentes',  desc: 'Dashboards en tiempo real con ventas, ganancia neta, productos más vendidos y tendencias del período.' },
+  { icon: 'lucide:users',          title: 'Multiusuario',           desc: 'Creá roles para dueños, vendedores y supervisores. Cada uno ve solo lo que necesita para trabajar.' },
+  { icon: 'lucide:shield-check',   title: 'Seguridad y Backups',    desc: 'Tus datos cifrados en la nube con backups automáticos. Nunca pierdas información crítica de tu negocio.' },
 ];
 ---
 
-<section id="features" class="fade-in relative z-10 py-28 px-[5vw] bg-soft
+<section id="features" class="relative z-10 py-28 px-[5vw] bg-soft
                               border-t border-b border-white/[0.07]">
   <div class="max-w-[1200px] mx-auto">
 
-    <div class="flex flex-wrap justify-between items-end gap-8 mb-16">
+    <div class="features-header flex flex-wrap justify-between items-end gap-8 mb-16">
       <div>
         <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
           Funcionalidades
@@ -29,18 +31,23 @@ const features = [
 
     <div class="grid grid-cols-1 md:grid-cols-3 divide-x divide-y divide-white/[0.07]
                 border border-white/[0.07] rounded-xl overflow-hidden">
-      {features.map((f) => (
-        <div class="group relative bg-card p-8 overflow-hidden hover:bg-[#1c1c1c] transition-colors duration-200">
+      {features.map((f, i) => (
+        <div
+          class="feat-card group relative bg-card p-8 overflow-hidden hover:bg-[#1c1c1c] transition-colors duration-300"
+          style={`--delay: ${i * 80}ms`}
+        >
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-               style="background: linear-gradient(135deg, rgba(220,38,38,0.05) 0%, transparent 60%)" />
+               style="background: linear-gradient(135deg, rgba(220,38,38,0.06) 0%, transparent 60%)" />
+          <div class="absolute top-0 left-0 h-[2px] w-0 bg-red group-hover:w-full transition-all duration-500 pointer-events-none" />
+
           <div class="relative z-10">
-            <div class="w-[42px] h-[42px] rounded-lg flex items-center justify-center text-lg mb-5
-                        border border-red/20"
+            <div class="feat-icon w-[42px] h-[42px] rounded-lg flex items-center justify-center mb-5
+                        border border-red/20 transition-all duration-300 group-hover:scale-110 group-hover:border-red/50"
                  style="background: rgba(220,38,38,0.1)">
-              {f.icon}
+              <Icon name={f.icon} class="w-5 h-5 text-red" />
             </div>
-            <p class="font-head font-bold text-base mb-2">{f.title}</p>
-            <p class="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
+            <p class="font-head font-bold text-base mb-2 group-hover:text-red transition-colors duration-300">{f.title}</p>
+            <p class="text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors duration-300">{f.desc}</p>
           </div>
         </div>
       ))}
@@ -48,3 +55,33 @@ const features = [
 
   </div>
 </section>
+
+<style>
+  .feat-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s;
+    transition-delay: var(--delay);
+  }
+  .feat-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .group:hover .feat-icon {
+    animation: icon-bounce 0.4s ease;
+  }
+  @keyframes icon-bounce {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.2) rotate(-5deg); }
+    70%  { transform: scale(0.95) rotate(3deg); }
+    100% { transform: scale(1.1); }
+  }
+</style>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.feat-card').forEach((c) => io.observe(c));
+</script>

@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const plans = [
   {
     name: 'Starter', price: '0', period: 'Gratis para siempre',
@@ -11,10 +13,10 @@ const plans = [
       { text: 'Multi-sucursal',      ok: false },
       { text: 'Integraciones',       ok: false },
     ],
-    cta: 'Empezar gratis', href: '#contact', style: 'outline',
+    cta: 'Crear cuenta gratis', href: 'https://app.devhubpos.com/register?plan=starter', style: 'outline',
   },
   {
-    name: 'Pro', price: '29', period: 'por mes · hasta 3 usuarios',
+    name: 'Pro', price: '30.000', period: 'por mes · hasta 3 usuarios',
     featured: true, badge: 'Más popular',
     features: [
       { text: 'Productos ilimitados', ok: true },
@@ -24,10 +26,10 @@ const plans = [
       { text: 'Alertas de stock',     ok: true },
       { text: 'Multi-sucursal',       ok: false },
     ],
-    cta: 'Probar 14 días gratis', href: '#contact', style: 'primary',
+    cta: 'Probar 7 días gratis', href: 'https://app.devhubpos.com/register?plan=pro', style: 'primary',
   },
   {
-    name: 'Business', price: '79', period: 'por mes · usuarios ilimitados',
+    name: 'Business', price: '60.000', period: 'por mes · usuarios ilimitados',
     featured: false,
     features: [
       { text: 'Productos ilimitados', ok: true },
@@ -37,15 +39,15 @@ const plans = [
       { text: 'Soporte 24/7',         ok: true },
       { text: 'Onboarding dedicado',  ok: true },
     ],
-    cta: 'Hablar con ventas', href: '#contact', style: 'outline',
+    cta: 'Probar 7 días gratis', href: 'https://app.devhubpos.com/register?plan=business', style: 'outline',
   },
 ];
 ---
 
-<section id="pricing" class="fade-in relative z-10 py-28 px-[5vw]">
+<section id="pricing" class="relative z-10 py-28 px-[5vw]">
   <div class="max-w-[1200px] mx-auto">
 
-    <div class="text-center mb-16">
+    <div class="pricing-header text-center mb-16">
       <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
         Planes y precios
       </span>
@@ -53,20 +55,21 @@ const plans = [
         Empezá gratis.<br />Escalá cuando crezcas.
       </h2>
       <p class="text-gray-500 font-light mt-4">
-        Sin compromisos. Sin tarjeta de crédito para el plan Starter.
+        7 días de prueba gratis en todos los planes. Sin tarjeta de crédito.
       </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
-      {plans.map((plan) => (
-        <div class={`relative rounded-xl p-8 border transition-transform duration-200 hover:-translate-y-1
-          ${plan.featured
-            ? 'border-red hover:shadow-card'
-            : 'border-white/[0.07] bg-card'}`}
-          style={plan.featured ? 'background: linear-gradient(160deg, rgba(220,38,38,0.08) 0%, #161616 50%)' : ''}>
-
+      {plans.map((plan, i) => (
+        <div
+          class={`plan-card relative rounded-xl p-8 border transition-all duration-300 cursor-default
+            ${plan.featured
+              ? 'border-red hover:shadow-card'
+              : 'border-white/[0.07] bg-card hover:border-white/20'}`}
+          style={`--delay: ${i * 120}ms; ${plan.featured ? 'background: linear-gradient(160deg, rgba(220,38,38,0.08) 0%, #161616 50%)' : ''}`}
+        >
           {plan.badge && (
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2
+            <div class="badge-pulse absolute -top-3 left-1/2 -translate-x-1/2
                         bg-red text-white text-[0.65rem] font-bold
                         uppercase tracking-widest px-3.5 py-1 rounded-full whitespace-nowrap">
               {plan.badge}
@@ -75,27 +78,36 @@ const plans = [
 
           <p class="font-head font-bold text-sm uppercase tracking-widest text-gray-500 mb-4">{plan.name}</p>
           <p class="font-head font-extrabold text-5xl tracking-tight leading-none mb-1">
-            <sup class="text-2xl align-super">$</sup>{plan.price}
+            {plan.price === '0' ? (
+              <span>Gratis</span>
+            ) : (
+              <span><sup class="text-2xl align-super">$</sup>{plan.price}</span>
+            )}
           </p>
           <p class="text-sm text-gray-500 mb-6">{plan.period}</p>
-
           <div class="h-px bg-white/[0.07] mb-6" />
 
           <ul class="flex flex-col gap-3 mb-8 list-none p-0 m-0">
-            {plan.features.map((f) => (
-              <li class={`flex items-center gap-2.5 text-sm ${f.ok ? 'text-gray-300' : 'text-gray-600 opacity-40'}`}>
-                <span class={f.ok ? 'text-red font-bold' : 'text-gray-500'}>{f.ok ? '✓' : '✗'}</span>
+            {plan.features.map((f, j) => (
+              <li class={`plan-feature flex items-center gap-2.5 text-sm ${f.ok ? 'text-gray-300' : 'text-gray-600 opacity-40'}`}
+                  style={`--fdelay: ${j * 60}ms`}>
+                <Icon
+                  name={f.ok ? 'lucide:check' : 'lucide:x'}
+                  class={`w-4 h-4 shrink-0 ${f.ok ? 'text-red' : 'text-gray-500'}`}
+                />
                 {f.text}
               </li>
             ))}
           </ul>
 
           <a href={plan.href}
-             class={`flex items-center justify-center w-full py-3 rounded-md text-sm font-medium
+             target="_blank" rel="noopener noreferrer"
+             class={`flex items-center justify-center gap-2 w-full py-3 rounded-md text-sm font-medium
                      transition-all duration-200 no-underline
                      ${plan.style === 'primary'
-                       ? 'bg-red hover:bg-red-dk text-white hover:shadow-glow hover:-translate-y-px'
+                       ? 'bg-red hover:bg-red-dk text-white hover:shadow-glow hover:-translate-y-px btn-primary-pulse'
                        : 'border border-white/[0.07] text-white hover:border-white/25 hover:bg-white/[0.04]'}`}>
+            <Icon name={plan.style === 'primary' ? 'lucide:user-plus' : 'lucide:arrow-right'} class="w-4 h-4" />
             {plan.cta}
           </a>
         </div>
@@ -104,3 +116,46 @@ const plans = [
 
   </div>
 </section>
+
+<style>
+  .pricing-header {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .pricing-header.visible { opacity: 1; transform: translateY(0); }
+
+  .plan-card {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+    transition-delay: var(--delay);
+  }
+  .plan-card.visible { opacity: 1; transform: translateY(0); }
+  .plan-card.visible:hover { transform: translateY(-6px); }
+
+  .plan-feature {
+    opacity: 0; transform: translateX(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: var(--fdelay);
+  }
+  .plan-card.visible .plan-feature { opacity: 1; transform: translateX(0); }
+
+  .badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }
+  @keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
+    50%       { box-shadow: 0 0 0 6px rgba(220,38,38,0); }
+  }
+
+  .btn-primary-pulse { animation: btn-glow 2.5s ease-in-out infinite; }
+  @keyframes btn-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.0); }
+    50%       { box-shadow: 0 0 20px 4px rgba(220,38,38,0.3); }
+  }
+</style>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.pricing-header, .plan-card').forEach((el) => io.observe(el));
+</script>

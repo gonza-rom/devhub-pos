@@ -1,44 +1,101 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
-<section id="contact" class="fade-in relative z-10 py-28 px-[5vw] text-center
+<section id="contact" class="relative z-10 py-28 px-[5vw] text-center
                               bg-soft border-t border-white/[0.07] overflow-hidden">
 
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-              w-[600px] h-[300px] pointer-events-none"
-       style="background: radial-gradient(ellipse, rgba(220,38,38,0.10) 0%, transparent 70%)" />
+  <div class="cta-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+              w-[600px] h-[300px] pointer-events-none rounded-full"
+       style="background: radial-gradient(ellipse, rgba(220,38,38,0.12) 0%, transparent 70%)" />
 
-  <div class="relative z-10 max-w-2xl mx-auto">
-    <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
-      ¿Listo para crecer?
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="particle particle-1" />
+    <div class="particle particle-2" />
+    <div class="particle particle-3" />
+  </div>
+
+  <div class="cta-content relative z-10 max-w-2xl mx-auto">
+    <span class="cta-label block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+      Empezá hoy
     </span>
-    <h2 class="font-head font-extrabold tracking-tight leading-[1.1]
+    <h2 class="cta-title font-head font-extrabold tracking-tight leading-[1.1]
                text-[clamp(2rem,4vw,3.5rem)] mb-5">
       Profesionalizá tu negocio<br />
-      <em class="not-italic text-red">hoy mismo.</em>
+      <em class="not-italic text-red">en 2 minutos.</em>
     </h2>
-    <p class="text-gray-500 font-light text-base leading-relaxed mb-10 max-w-[44ch] mx-auto">
-      Más de 500 comercios ya usan DevHub POS para vender más y perder menos.
-      Sumate sin riesgos.
+    <p class="cta-sub text-gray-500 font-light text-base leading-relaxed mb-10 max-w-[44ch] mx-auto">
+      Creá tu cuenta, configurá tu comercio y empezá a vender.
+      7 días gratis, sin tarjeta de crédito.
     </p>
 
-    <div class="flex gap-4 justify-center flex-wrap">
-      <a href="#pricing"
-         class="inline-flex items-center gap-2 px-8 py-3.5 rounded-md font-medium
+    <div class="cta-buttons flex gap-4 justify-center flex-wrap">
+      <a href="https://app.devhubpos.com/register"
+         target="_blank" rel="noopener noreferrer"
+         class="btn-main inline-flex items-center gap-2 px-8 py-3.5 rounded-md font-medium
                 bg-red hover:bg-red-dk text-white
-                transition-all duration-200 hover:-translate-y-px hover:shadow-glow no-underline">
-        🚀 Comenzar ahora
+                transition-all duration-200 hover:-translate-y-px no-underline">
+        <Icon name="lucide:user-plus" class="w-4 h-4" /> Crear cuenta gratis
       </a>
-      <a href="mailto:hola@devhubpos.com"
+      <a href="https://app.devhubpos.com/login"
+         target="_blank" rel="noopener noreferrer"
          class="inline-flex items-center gap-2 px-8 py-3.5 rounded-md font-medium
                 border border-white/[0.07] text-white
                 hover:border-white/25 hover:bg-white/[0.04] transition-all duration-200 no-underline">
-        📅 Agendar demo
+        <Icon name="lucide:log-in" class="w-4 h-4" /> Iniciar sesión
       </a>
     </div>
 
-    <p class="mt-6 text-xs text-gray-600">
-      Sin tarjeta de crédito · Cancelás cuando querés · Soporte en español
+    <p class="cta-note mt-6 text-xs text-gray-600">
+      Sin tarjeta de crédito · 7 días gratis · Cancelás cuando querés
     </p>
   </div>
 </section>
+
+<style>
+  .cta-glow { animation: glow-breathe 4s ease-in-out infinite; }
+  @keyframes glow-breathe {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.15); }
+  }
+  .particle {
+    position: absolute; width: 4px; height: 4px;
+    background: #DC2626; border-radius: 50%; opacity: 0.4;
+  }
+  .particle-1 { top: 20%; left: 15%; animation: float-particle 6s ease-in-out infinite; }
+  .particle-2 { top: 60%; right: 20%; animation: float-particle 8s ease-in-out infinite reverse; }
+  .particle-3 { bottom: 25%; left: 40%; animation: float-particle 7s ease-in-out infinite 2s; }
+  @keyframes float-particle {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+    50%       { transform: translateY(-20px) scale(1.5); opacity: 0.8; }
+  }
+  .cta-label, .cta-title, .cta-sub, .cta-buttons, .cta-note {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .cta-label   { transition-delay: 0s; }
+  .cta-title   { transition-delay: 0.1s; }
+  .cta-sub     { transition-delay: 0.2s; }
+  .cta-buttons { transition-delay: 0.3s; }
+  .cta-note    { transition-delay: 0.4s; }
+  .cta-content.visible .cta-label,
+  .cta-content.visible .cta-title,
+  .cta-content.visible .cta-sub,
+  .cta-content.visible .cta-buttons,
+  .cta-content.visible .cta-note { opacity: 1; transform: translateY(0); }
+
+  .btn-main { animation: btn-pulse 2.5s ease-in-out infinite; }
+  @keyframes btn-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+    50%       { box-shadow: 0 0 24px 6px rgba(220,38,38,0.3); }
+  }
+</style>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.2 }
+  );
+  const content = document.querySelector('.cta-content');
+  if (content) io.observe(content);
+</script>
