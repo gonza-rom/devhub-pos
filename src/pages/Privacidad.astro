@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = '28 de febrero de 2026';
+---
+
+<Layout
+  title="Política de Privacidad — DevHub POS"
+  description="Política de privacidad de DevHub POS. Conocé cómo manejamos tus datos."
+>
+  <Navbar />
+
+  <main class="relative z-10 pt-32 pb-24 px-[5vw]">
+    <div class="max-w-[780px] mx-auto">
+
+      <!-- Header -->
+      <div class="mb-12">
+        <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+          Legal
+        </span>
+        <h1 class="font-head font-extrabold text-[clamp(2rem,4vw,3rem)] tracking-tight leading-tight mb-4">
+          Política de Privacidad
+        </h1>
+        <p class="text-gray-500 text-sm">Última actualización: {lastUpdated}</p>
+      </div>
+
+      <div class="prose-content">
+
+        <section>
+          <h2>1. ¿Quiénes somos?</h2>
+          <p>
+            DevHub POS es un sistema de gestión comercial en la nube destinado a emprendimientos
+            y comercios. Operamos bajo el nombre comercial <strong>DevHub POS</strong> con sede en Argentina.
+            Podés contactarnos en <a href="mailto:devhubpos@gmail.com">devhubpos@gmail.com</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. ¿Qué datos recopilamos?</h2>
+          <p>Al usar DevHub POS podemos recopilar los siguientes datos:</p>
+          <ul>
+            <li><strong>Datos de registro:</strong> nombre, dirección de email y contraseña al crear tu cuenta.</li>
+            <li><strong>Datos del negocio:</strong> nombre del comercio, productos, precios, stock y ventas que vos mismo cargás en el sistema.</li>
+            <li><strong>Datos de uso:</strong> páginas visitadas, acciones realizadas dentro de la plataforma y registros técnicos (logs).</li>
+            <li><strong>Datos de contacto:</strong> mensajes que nos enviés por email o WhatsApp.</li>
+          </ul>
+          <p>No recopilamos datos de tarjetas de crédito ni información de pagos de tus clientes finales.</p>
+        </section>
+
+        <section>
+          <h2>3. ¿Para qué usamos tus datos?</h2>
+          <ul>
+            <li>Brindar y mantener el servicio de DevHub POS.</li>
+            <li>Enviarte notificaciones relacionadas con tu cuenta (cambios importantes, facturas, soporte).</li>
+            <li>Mejorar la plataforma en base al uso real.</li>
+            <li>Responderte cuando nos contactás.</li>
+          </ul>
+          <p>No usamos tus datos para publicidad de terceros ni los vendemos a nadie.</p>
+        </section>
+
+        <section>
+          <h2>4. ¿Con quién compartimos tus datos?</h2>
+          <p>
+            Para operar el servicio, utilizamos los siguientes proveedores de confianza que pueden
+            tener acceso a tus datos en los términos de sus propias políticas:
+          </p>
+          <ul>
+            <li><strong>Supabase</strong> — base de datos y autenticación (<a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">supabase.com/privacy</a>)</li>
+            <li><strong>Vercel</strong> — hosting y despliegue (<a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">vercel.com/legal/privacy-policy</a>)</li>
+          </ul>
+          <p>No compartimos tus datos con ningún otro tercero salvo requerimiento legal expreso.</p>
+        </section>
+
+        <section>
+          <h2>5. ¿Por cuánto tiempo guardamos tus datos?</h2>
+          <p>
+            Guardamos tus datos mientras tu cuenta esté activa. Si cancelás tu cuenta podés
+            solicitarnos la eliminación de tus datos enviando un email a
+            <a href="mailto:devhubpos@gmail.com">devhubpos@gmail.com</a>.
+            Procesamos estas solicitudes en un plazo máximo de 30 días.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Seguridad</h2>
+          <p>
+            Tus datos se almacenan en servidores seguros con cifrado en tránsito (HTTPS) y en reposo.
+            Realizamos backups automáticos diarios. Sin embargo, ningún sistema es 100% infalible
+            y no podemos garantizar seguridad absoluta.
+          </p>
+        </section>
+
+        <section>
+          <h2>7. Tus derechos (Ley 25.326)</h2>
+          <p>
+            En cumplimiento de la Ley Argentina 25.326 de Protección de Datos Personales, tenés derecho a:
+          </p>
+          <ul>
+            <li>Acceder a los datos que tenemos sobre vos.</li>
+            <li>Solicitar la rectificación de datos incorrectos.</li>
+            <li>Solicitar la eliminación de tus datos.</li>
+            <li>Oponerte al tratamiento de tus datos.</li>
+          </ul>
+          <p>
+            Para ejercer cualquiera de estos derechos escribinos a
+            <a href="mailto:devhubpos@gmail.com">devhubpos@gmail.com</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>8. Cookies</h2>
+          <p>
+            Usamos cookies técnicas necesarias para el funcionamiento del servicio (sesión de usuario)
+            y cookies de analítica para entender cómo se usa la plataforma. No usamos cookies
+            de publicidad ni rastreo de terceros.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Cambios en esta política</h2>
+          <p>
+            Podemos actualizar esta política ocasionalmente. Te notificaremos por email si hay
+            cambios importantes. El uso continuado del servicio después de los cambios implica
+            tu aceptación.
+          </p>
+        </section>
+
+        <section>
+          <h2>10. Contacto</h2>
+          <p>
+            Si tenés preguntas sobre esta política escribinos a
+            <a href="mailto:devhubpos@gmail.com">devhubpos@gmail.com</a>.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prose-content section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .prose-content section:last-child {
+    border-bottom: none;
+  }
+  .prose-content h2 {
+    font-family: var(--font-family-head);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #f9fafb;
+    margin-bottom: 1rem;
+  }
+  .prose-content p {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+  }
+  .prose-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .prose-content ul li {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .prose-content ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #DC2626;
+    font-size: 0.75rem;
+  }
+  .prose-content a {
+    color: #DC2626;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .prose-content a:hover { color: #B91C1C; }
+  .prose-content strong { color: #e5e7eb; }
+</style>
