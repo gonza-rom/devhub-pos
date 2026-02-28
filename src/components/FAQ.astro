@@ -1,0 +1,143 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const faqs = [
+  {
+    q: '¿Necesito instalar algo para usar DevHub POS?',
+    a: 'No. DevHub POS es 100% en la nube. Funciona desde cualquier navegador web, ya sea en tu computadora, tablet o celular. Sin instalaciones, sin actualizaciones manuales.',
+  },
+  {
+    q: '¿Qué pasa con mis datos si cancelo?',
+    a: 'Tus datos son tuyos. Podés exportar todo tu historial de ventas, productos e inventario en formato Excel o CSV antes de cancelar. Nunca perdés acceso a tu información.',
+  },
+  {
+    q: '¿Puedo usar DevHub POS sin conexión a internet?',
+    a: 'El sistema requiere conexión para sincronizar datos en tiempo real. Sin embargo, estamos trabajando en un modo offline para ventas básicas que estará disponible próximamente.',
+  },
+  {
+    q: '¿Cómo funciona el período de prueba gratuito?',
+    a: 'Los 7 días de prueba son completamente gratuitos y sin restricciones. Accedés a todas las funciones del plan Pro. No te pedimos tarjeta de crédito para empezar.',
+  },
+  {
+    q: '¿Puedo usar DevHub POS con mi lector de código de barras?',
+    a: 'Sí. El modo caja es compatible con cualquier lector de código de barras USB o Bluetooth estándar. También podés usar la cámara de tu celular para escanear.',
+  },
+  {
+    q: '¿Tienen soporte en español?',
+    a: 'Sí, todo nuestro soporte es en español rioplatense. Podés contactarnos por email, chat o WhatsApp. Los planes Pro y Business tienen soporte prioritario con respuesta en menos de 2 horas.',
+  },
+  {
+    q: '¿Qué medios de pago puedo registrar?',
+    a: 'Podés registrar ventas en efectivo, tarjeta de débito, crédito, transferencia bancaria, Mercado Pago y cualquier otro medio personalizado. El sistema no cobra comisiones sobre tus ventas.',
+  },
+];
+---
+
+<section id="faq" class="relative z-10 py-28 px-[5vw]">
+  <div class="max-w-[800px] mx-auto">
+
+    <div class="faq-header text-center mb-16">
+      <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+        Preguntas frecuentes
+      </span>
+      <h2 class="font-head font-extrabold tracking-tight leading-[1.1] text-[clamp(2rem,3.5vw,3rem)]">
+        Todo lo que necesitás saber.
+      </h2>
+    </div>
+
+    <div class="faq-list flex flex-col divide-y divide-white/[0.07]">
+      {faqs.map((item, i) => (
+        <div
+          class="faq-item py-5 cursor-pointer group"
+          style={`--delay: ${i * 60}ms`}
+          data-index={i}
+        >
+          <button
+            class="faq-btn flex items-center justify-between w-full text-left gap-4"
+            aria-expanded="false"
+          >
+            <span class="font-medium text-sm leading-relaxed pr-2 group-hover:text-white transition-colors duration-200">
+              {item.q}
+            </span>
+            <span class="faq-icon shrink-0 w-7 h-7 rounded-full flex items-center justify-center
+                         border border-white/[0.07] text-gray-500 group-hover:border-red/30
+                         group-hover:text-red transition-all duration-200">
+              <Icon name="lucide:plus" class="w-3.5 h-3.5 plus-icon transition-transform duration-300" />
+            </span>
+          </button>
+          <div class="faq-answer overflow-hidden max-h-0 transition-[max-height] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]">
+            <p class="text-gray-500 text-sm leading-relaxed pt-4 pb-1">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="faq-footer mt-12 text-center">
+      <p class="text-gray-500 text-sm mb-4">
+        ¿No encontrás lo que buscás?
+      </p>
+      <a href="mailto:devhubpos@gmail.com"
+         class="inline-flex items-center gap-2 text-sm text-red hover:text-red-dk
+                transition-colors duration-200 no-underline font-medium">
+        <Icon name="lucide:mail" class="w-4 h-4" /> devhubpos@gmail.com
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .faq-header {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .faq-header.visible { opacity: 1; transform: translateY(0); }
+
+  .faq-item {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: var(--delay);
+  }
+  .faq-item.visible { opacity: 1; transform: translateY(0); }
+
+  .faq-item.open .faq-answer { max-height: 300px !important; }
+  .faq-item.open .plus-icon { transform: rotate(45deg); }
+  .faq-item.open .faq-icon {
+    border-color: rgba(220,38,38,0.4);
+    color: #DC2626;
+    background: rgba(220,38,38,0.1);
+  }
+
+  .faq-footer {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s 0.3s ease, transform 0.5s 0.3s ease;
+  }
+  .faq-footer.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  // Intersection observer
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.faq-header, .faq-item, .faq-footer').forEach((el) => io.observe(el));
+
+  // Accordion
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const btn = item.querySelector('.faq-btn')!;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach((i) => {
+        i.classList.remove('open');
+        i.querySelector('.faq-btn')!.setAttribute('aria-expanded', 'false');
+      });
+      // Toggle clicked
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

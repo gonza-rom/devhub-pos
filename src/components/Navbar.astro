@@ -2,33 +2,37 @@
 import { Icon } from 'astro-icon/components';
 
 const links = [
-  { href: '#features', label: 'Funcionalidades' },
-  { href: '#pricing',  label: 'Planes' },
-  { href: '#contact',  label: 'Contacto' },
+  { href: '#how-it-works', label: 'Cómo funciona' },
+  { href: '#features',   label: 'Funcionalidades' },
+  { href: '#pricing',    label: 'Planes' },
+  { href: '#testimonials', label: 'Testimonios' },
+  { href: '#contact',    label: 'Contacto' },
 ];
 ---
 
-<nav class="fixed top-0 inset-x-0 z-50 flex items-center justify-between
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50 flex items-center justify-between
             px-[5vw] h-[68px]
             bg-[#0F0F0F]/85 backdrop-blur-xl
-            border-b border-white/[0.07]">
+            border-b border-white/[0.07] transition-all duration-300">
 
   <a href="/#" class="flex items-center no-underline shrink-0">
     <img src="/devhub-pos-logo-bg.png" alt="DevHub POS" class="h-9 w-auto" />
   </a>
 
-  <ul class="hidden md:flex gap-8 list-none m-0 p-0 absolute left-1/2 -translate-x-1/2">
+  <!-- Desktop links -->
+  <ul class="hidden lg:flex gap-8 list-none m-0 p-0 absolute left-1/2 -translate-x-1/2">
     {links.map((l) => (
       <li>
         <a href={l.href}
-           class="text-gray-500 hover:text-white text-sm font-medium transition-colors duration-200 no-underline">
+           class="nav-link text-gray-500 hover:text-white text-sm font-medium transition-colors duration-200 no-underline relative">
           {l.label}
         </a>
       </li>
     ))}
   </ul>
 
-  <div class="flex gap-3 items-center shrink-0">
+  <!-- Desktop CTAs -->
+  <div class="hidden lg:flex gap-3 items-center shrink-0">
     <a href="https://app.devhubpos.com/login"
        target="_blank" rel="noopener noreferrer"
        class="px-5 py-2.5 rounded-md text-sm font-medium
@@ -46,4 +50,140 @@ const links = [
       <Icon name="lucide:user-plus" class="w-4 h-4" /> Crear cuenta
     </a>
   </div>
+
+  <!-- Mobile hamburger -->
+  <button id="menu-toggle"
+          class="lg:hidden flex flex-col gap-[5px] p-2 rounded-md hover:bg-white/5 transition-colors"
+          aria-label="Abrir menú" aria-expanded="false">
+    <span class="ham-line block w-5 h-[1.5px] bg-white transition-all duration-300 origin-center" />
+    <span class="ham-line block w-5 h-[1.5px] bg-white transition-all duration-300" />
+    <span class="ham-line block w-5 h-[1.5px] bg-white transition-all duration-300 origin-center" />
+  </button>
 </nav>
+
+<!-- Mobile drawer — rendered always in DOM, shown/hidden via JS inline styles -->
+<div id="mobile-menu" style="display:none; position:fixed; inset:0; z-index:40;">
+  <!-- Backdrop -->
+  <div id="menu-backdrop"
+       style="position:absolute; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px);" />
+
+  <!-- Panel -->
+  <div id="mobile-panel"
+       style="position:absolute; top:0; right:0; height:100%; width:288px; max-width:85vw;
+              background:#111111; border-left:1px solid rgba(255,255,255,0.07);
+              display:flex; flex-direction:column; padding-top:68px; padding-bottom:32px;
+              padding-left:24px; padding-right:24px;
+              transform:translateX(100%); transition:transform 0.3s cubic-bezier(.32,.72,0,1);">
+
+    <ul style="display:flex; flex-direction:column; gap:4px; margin-top:16px; list-style:none; padding:0; margin-bottom:0;">
+      {links.map((l) => (
+        <li>
+          <a href={l.href}
+             class="mobile-link"
+             style="display:flex; align-items:center; padding:12px; border-radius:8px;
+                    color:#9ca3af; font-size:0.95rem; font-weight:500; text-decoration:none;
+                    transition:color 0.2s, background 0.2s;"
+             onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'"
+             onmouseout="this.style.color='#9ca3af'; this.style.background='transparent'">
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div style="height:1px; background:rgba(255,255,255,0.07); margin:24px 0;" />
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <a href="https://app.devhubpos.com/login"
+         target="_blank" rel="noopener noreferrer"
+         style="display:flex; align-items:center; justify-content:center; gap:8px;
+                padding:12px; border-radius:6px; font-size:0.875rem; font-weight:500;
+                border:1px solid rgba(255,255,255,0.07); color:#fff; text-decoration:none;
+                transition:border-color 0.2s, background 0.2s;"
+         onmouseover="this.style.borderColor='rgba(255,255,255,0.25)'; this.style.background='rgba(255,255,255,0.04)'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'; this.style.background='transparent'">
+        <Icon name="lucide:log-in" class="w-4 h-4" /> Iniciar sesión
+      </a>
+      <a href="https://app.devhubpos.com/register"
+         target="_blank" rel="noopener noreferrer"
+         style="display:flex; align-items:center; justify-content:center; gap:8px;
+                padding:12px; border-radius:6px; font-size:0.875rem; font-weight:500;
+                background:#DC2626; color:#fff; text-decoration:none; transition:background 0.2s;"
+         onmouseover="this.style.background='#B91C1C'"
+         onmouseout="this.style.background='#DC2626'">
+        <Icon name="lucide:user-plus" class="w-4 h-4" /> Crear cuenta gratis
+      </a>
+    </div>
+
+    <p style="margin-top:auto; font-size:0.7rem; color:#4b5563; text-align:center;">
+      7 días gratis · Sin tarjeta de crédito
+    </p>
+  </div>
+</div>
+
+<style>
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: #DC2626;
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+</style>
+
+<script>
+  const toggle   = document.getElementById('menu-toggle') as HTMLButtonElement;
+  const menu     = document.getElementById('mobile-menu') as HTMLDivElement;
+  const panel    = document.getElementById('mobile-panel') as HTMLDivElement;
+  const backdrop = document.getElementById('menu-backdrop') as HTMLDivElement;
+  const lines    = toggle.querySelectorAll('.ham-line') as NodeListOf<HTMLElement>;
+  let isOpen     = false;
+
+  function openMenu() {
+    isOpen = true;
+    menu.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+    // Animate panel in (needs tiny delay so display:block renders first)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        panel.style.transform = 'translateX(0)';
+      });
+    });
+    // Hamburger → X
+    lines[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+    lines[1].style.opacity   = '0';
+    lines[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    panel.style.transform = 'translateX(100%)';
+    document.body.style.overflow = '';
+    toggle.setAttribute('aria-expanded', 'false');
+    // Hide after transition
+    setTimeout(() => {
+      if (!isOpen) menu.style.display = 'none';
+    }, 320);
+    // X → Hamburger
+    lines[0].style.transform = '';
+    lines[1].style.opacity   = '1';
+    lines[2].style.transform = '';
+  }
+
+  toggle.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+  backdrop.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-link').forEach((l) => l.addEventListener('click', closeMenu));
+  window.addEventListener('resize', () => { if (window.innerWidth >= 1024 && isOpen) closeMenu(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) closeMenu(); });
+
+  // Scroll shadow
+  const navbar = document.getElementById('navbar') as HTMLElement;
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.4)' : '';
+  }, { passive: true });
+</script>

@@ -1,0 +1,131 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const trust = [
+  { icon: 'lucide:lock',           label: 'Datos 100% tuyos',                  desc: 'Exportá todo cuando quieras. Sin retención de información.' },
+  { icon: 'lucide:x-circle',       label: 'Sin contrato',                      desc: 'Cancelás cuando querés. Sin permanencia ni multas.' },
+  { icon: 'lucide:cloud',          label: 'Backups automáticos',               desc: 'Tu información segura en la nube, todos los días.' },
+  { icon: 'lucide:message-circle', label: 'Soporte en español',                desc: 'Respondemos por email y WhatsApp. Sin bots, personas reales.' },
+  { icon: 'lucide:smartphone',     label: 'Funciona en cualquier dispositivo', desc: 'Celular, tablet o computadora. Sin instalar nada.' },
+  { icon: 'lucide:shield-check',   label: '7 días gratis',                     desc: 'Sin tarjeta de crédito. Probás sin comprometerte.' },
+];
+---
+
+<section id="testimonials" class="relative z-10 py-28 px-[5vw] bg-soft border-t border-b border-white/[0.07] overflow-hidden">
+
+  <div class="absolute left-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] pointer-events-none opacity-30"
+       style="background: radial-gradient(ellipse, rgba(220,38,38,0.08) 0%, transparent 70%)" />
+
+  <div class="max-w-[1200px] mx-auto">
+
+    <!-- Header -->
+    <div class="test-header text-center mb-16">
+      <span class="block text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-red mb-4">
+        Caso real
+      </span>
+      <h2 class="font-head font-extrabold tracking-tight leading-[1.1] text-[clamp(2rem,3.5vw,3rem)]">
+        Lo que dicen quienes<br />
+        <em class="not-italic text-red">ya lo usan.</em>
+      </h2>
+    </div>
+
+    <!-- Single real testimonial -->
+    <div class="test-card max-w-[700px] mx-auto mb-20">
+      <div class="relative bg-card border border-red/20 rounded-2xl p-8 sm:p-10"
+           style="background: linear-gradient(160deg, rgba(220,38,38,0.06) 0%, #161616 60%)">
+
+        <!-- Decorative quote mark -->
+        <div class="absolute top-4 right-8 font-head text-[7rem] leading-none text-red/10 select-none pointer-events-none">"</div>
+
+        <!-- Stars -->
+        <div class="flex gap-1 mb-6">
+          {[1,2,3,4,5].map(() => (
+            <Icon name="lucide:star" class="w-4 h-4 text-amber-400 fill-amber-400" />
+          ))}
+        </div>
+
+        <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-8 relative z-10">
+          "Antes no sabía cuánto stock tenía ni qué estaba vendiendo realmente.
+          Tenía productos sin actualizar y perdía ventas sin darme cuenta.
+          Con DevHub POS pude ordenar todo el catálogo, controlar el inventario
+          en tiempo real y empezar a vender online. Ahora tengo el negocio bajo control."
+        </p>
+
+        <!-- Author -->
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0
+                      font-head font-bold text-sm text-white border border-red/30"
+               style="background: linear-gradient(135deg, rgba(220,38,38,0.4), rgba(220,38,38,0.15))">
+            ML
+          </div>
+          <div>
+            <p class="font-semibold text-sm leading-none mb-1.5">María Lourdes Quispe</p>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-500 text-xs">Dueña · JMR Marroquinería</span>
+              <a href="https://www.jmrmarroquineria.com.ar/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1 text-xs text-red hover:text-red-dk
+                        transition-colors duration-200 no-underline">
+                <Icon name="lucide:external-link" class="w-3 h-3" /> jmrmarroquineria.com.ar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="trust-header text-center mb-10">
+      <p class="text-gray-500 text-sm">Diseñado para que puedas probar sin riesgos.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {trust.map((t, i) => (
+        <div
+          class="trust-card flex items-start gap-4 bg-card border border-white/[0.07] rounded-xl p-5
+                 hover:border-red/20 hover:bg-[#1a1a1a] transition-all duration-300"
+          style={`--delay: ${i * 60}ms`}
+        >
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 border border-red/20"
+               style="background: rgba(220,38,38,0.08)">
+            <Icon name={t.icon} class="w-4 h-4 text-red" />
+          </div>
+          <div>
+            <p class="font-medium text-sm mb-1">{t.label}</p>
+            <p class="text-gray-500 text-xs leading-relaxed">{t.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .test-header, .trust-header {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .test-header.visible, .trust-header.visible { opacity: 1; transform: translateY(0); }
+
+  .test-card {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.6s 0.1s ease, transform 0.6s 0.1s ease;
+  }
+  .test-card.visible { opacity: 1; transform: translateY(0); }
+
+  .trust-card {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: var(--delay);
+  }
+  .trust-card.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.test-header, .test-card, .trust-header, .trust-card').forEach((el) => io.observe(el));
+</script>
