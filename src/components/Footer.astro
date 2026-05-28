@@ -39,24 +39,32 @@ const links = [
   </div>
 
   <!-- Bottom bar -->
-  <div class="flex flex-wrap items-center justify-between gap-4 px-[5vw] py-8">
+<div class="flex flex-wrap items-center justify-between gap-4 px-[5vw] py-8">
+  
+  <!-- Logos apilados -->
+  <div class="flex flex-col items-start gap-2 ">
     <a href="/#" class="no-underline">
       <img src="/devhub-pos-logo-bg.png" alt="DevHub POS"
            class="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200" />
     </a>
-
-    <p class="text-xs text-gray-600">
-      © {new Date().getFullYear()} DevHub POS. Todos los derechos reservados.
-    </p>
-
-    <nav class="flex gap-6">
-      {links.map((l) => (
-        <a href={l.href}
-           class="text-xs text-gray-500 hover:text-white transition-colors duration-200 no-underline">
-          {l.label}
-        </a>
-      ))}
-    </nav>
+    <a href="https://www.devhub.com.ar/" class="no-underline" target="_blank">
+      <img src="/devhub.png" alt="DevHub"
+           class="h-10 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200" />
+    </a>
   </div>
+
+  <p class="text-xs text-gray-200">
+    © {new Date().getFullYear()} DevHub POS. Todos los derechos reservados.
+  </p>
+
+  <nav class="flex gap-6">
+    {links.map((l) => (
+      <a href={l.href}
+         class="text-xs text-gray-200 hover:text-white transition-colors duration-200 no-underline">
+        {l.label}
+      </a>
+    ))}
+  </nav>
+</div>
 
 </footer>
